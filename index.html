@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ja">
-<link rel="apple-touch-icon" href="money-transfer.jpg">
 <head>
+    <link rel="apple-touch-icon" href="money-transfer.jpg">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>マイページ / 給与・経費管理</title>
@@ -652,65 +652,42 @@
         let editingDateKey = null;
         let editingExpenseIndex = null;
         
-        let appData = { shifts: {}, expenses: {} };
-
+       let appData = { shifts: {}, expenses: {} };
+        
+        // 埋め込まれたデータを読み込む
         const embeddedDataStr = '{"shifts":{"2026-07":[{"date":"2026-06-04","campus":"亀戸","job":"保育","wage":1400,"hours":1,"pay":1400,"transit":1035,"allowance":0,"timeSpan":"03:00PM-04:00PM","memo":""},{"date":"2026-06-04","campus":"亀戸","job":"絵画造形","wage":1600,"hours":2,"pay":3200,"transit":1035,"allowance":0,"timeSpan":"04:00PM-06:00PM","memo":""},{"date":"2026-06-04","campus":"亀戸","job":"保育","wage":1400,"hours":0.5,"pay":700,"transit":1035,"allowance":0,"timeSpan":"06:00PM-06:30PM","memo":""},{"date":"2026-06-05","campus":"下高井戸","job":"保育","wage":1400,"hours":2.5,"pay":3500,"transit":0,"allowance":0,"timeSpan":"01:30PM-04:00PM","memo":""},{"date":"2026-06-05","campus":"下高井戸","job":"絵画造形","wage":1600,"hours":1,"pay":1600,"transit":0,"allowance":0,"timeSpan":"04:00PM-05:00PM","memo":""},{"date":"2026-06-11","campus":"亀戸","job":"保育","wage":1400,"hours":1,"pay":1400,"transit":1035,"allowance":0,"timeSpan":"03:00PM-04:00PM","memo":""},{"date":"2026-06-11","campus":"亀戸","job":"絵画造形","wage":1600,"hours":2,"pay":3200,"transit":1035,"allowance":0,"timeSpan":"04:00PM-06:00PM","memo":""},{"date":"2026-06-11","campus":"亀戸","job":"保育","wage":1400,"hours":0.5,"pay":700,"transit":1035,"allowance":0,"timeSpan":"06:00PM-06:30PM","memo":""},{"date":"2026-06-18","campus":"下高井戸","job":"保育","wage":1400,"hours":1,"pay":1400,"transit":1035,"allowance":0,"timeSpan":"03:00PM-04:00PM","memo":""},{"date":"2026-06-18","campus":"下高井戸","job":"絵画造形","wage":1600,"hours":2,"pay":3200,"transit":1035,"allowance":0,"timeSpan":"04:00PM-06:00PM","memo":""},{"date":"2026-06-18","campus":"下高井戸","job":"保育","wage":1400,"hours":0.5,"pay":700,"transit":1035,"allowance":0,"timeSpan":"06:00PM-06:30PM","memo":""},{"date":"2026-06-19","campus":"下高井戸","job":"保育","wage":1400,"hours":1.5,"pay":2100,"transit":0,"allowance":0,"timeSpan":"02:30PM-04:00PM","memo":""},{"date":"2026-06-19","campus":"下高井戸","job":"絵画造形","wage":1600,"hours":1,"pay":1600,"transit":0,"allowance":0,"timeSpan":"04:00PM-05:00PM","memo":""},{"date":"2026-06-25","campus":"亀戸","job":"保育","wage":1400,"hours":1,"pay":1400,"transit":1035,"allowance":0,"timeSpan":"03:00PM-04:00PM","memo":""},{"date":"2026-06-25","campus":"亀戸","job":"絵画造形","wage":1600,"hours":2,"pay":3200,"transit":1035,"allowance":0,"timeSpan":"04:00PM-06:00PM","memo":""},{"date":"2026-06-25","campus":"亀戸","job":"保育","wage":1400,"hours":0.5,"pay":700,"transit":1035,"allowance":0,"timeSpan":"06:00PM-06:30PM","memo":""},{"date":"2026-06-26","campus":"下高井戸","job":"保育","wage":1400,"hours":1.5,"pay":2100,"transit":280,"allowance":0,"timeSpan":"02:30PM-04:00PM","memo":""},{"date":"2026-06-26","campus":"下高井戸","job":"絵画造形","wage":1600,"hours":1,"pay":1600,"transit":280,"allowance":0,"timeSpan":"04:00PM-05:00PM","memo":""},{"date":"2026-06-12","campus":"下高井戸","job":"保育","wage":1400,"hours":1.5,"pay":2100,"transit":280,"allowance":0,"timeSpan":"02:30PM-04:00PM","memo":""},{"date":"2026-06-12","campus":"下高井戸","job":"絵画造形","wage":1600,"hours":1,"pay":1600,"transit":280,"allowance":0,"timeSpan":"04:00PM-05:00PM","memo":""},{"date":"2026-06-15","campus":"自宅","job":"インターン","wage":1400,"hours":3,"pay":4200,"transit":0,"allowance":0,"timeSpan":"02:00PM-05:00PM","memo":""}],"2026-06":[{"date":"2026-04-25","campus":"自宅","job":"その他","wage":0,"hours":1,"pay":0,"transit":0,"allowance":0,"timeSpan":"03:00PM-04:00PM","memo":""},{"date":"2026-05-07","campus":"亀戸","job":"保育","wage":1400,"hours":3,"pay":4200,"transit":1035,"allowance":0,"timeSpan":"01:00PM-04:00PM","memo":""},{"date":"2026-05-07","campus":"亀戸","job":"絵画造形","wage":1600,"hours":2,"pay":3200,"transit":1035,"allowance":0,"timeSpan":"04:00PM-06:00PM","memo":""},{"date":"2026-05-07","campus":"亀戸","job":"保育","wage":1400,"hours":1,"pay":1400,"transit":1035,"allowance":0,"timeSpan":"06:00PM-07:00PM","memo":""},{"date":"2026-05-14","campus":"亀戸","job":"保育","wage":1400,"hours":1,"pay":1400,"transit":1035,"allowance":0,"timeSpan":"03:00PM-04:00PM","memo":""},{"date":"2026-05-14","campus":"亀戸","job":"絵画造形","wage":1600,"hours":2,"pay":3200,"transit":1035,"allowance":0,"timeSpan":"04:00PM-06:00PM","memo":""},{"date":"2026-05-14","campus":"亀戸","job":"保育","wage":1400,"hours":1,"pay":1400,"transit":1035,"allowance":0,"timeSpan":"06:00PM-07:00PM","memo":""},{"date":"2026-05-21","campus":"亀戸","job":"保育","wage":1400,"hours":1,"pay":1400,"transit":1035,"allowance":0,"timeSpan":"03:00PM-04:00PM","memo":""},{"date":"2026-05-21","campus":"亀戸","job":"絵画造形","wage":1600,"hours":2,"pay":3200,"transit":1035,"allowance":0,"timeSpan":"04:00PM-06:00PM","memo":""},{"date":"2026-05-21","campus":"亀戸","job":"保育","wage":1400,"hours":1,"pay":1400,"transit":1035,"allowance":0,"timeSpan":"06:00PM-07:00PM","memo":""},{"date":"2026-05-28","campus":"下高井戸","job":"保育","wage":1400,"hours":1,"pay":1400,"transit":1035,"allowance":0,"timeSpan":"03:00PM-04:00PM","memo":""},{"date":"2026-05-28","campus":"下高井戸","job":"絵画造形","wage":1600,"hours":2,"pay":3200,"transit":1035,"allowance":0,"timeSpan":"04:00PM-06:00PM","memo":""},{"date":"2026-05-28","campus":"下高井戸","job":"保育","wage":1400,"hours":1,"pay":1400,"transit":1035,"allowance":0,"timeSpan":"06:00PM-07:00PM","memo":""},{"date":"2026-05-08","campus":"下高井戸","job":"保育","wage":1400,"hours":1,"pay":1400,"transit":0,"allowance":0,"timeSpan":"03:00PM-04:00PM","memo":""},{"date":"2026-05-08","campus":"下高井戸","job":"絵画造形","wage":1600,"hours":1,"pay":1600,"transit":0,"allowance":0,"timeSpan":"04:00PM-05:00PM","memo":""},{"date":"2026-05-15","campus":"下高井戸","job":"保育","wage":1400,"hours":1,"pay":1400,"transit":0,"allowance":0,"timeSpan":"03:00PM-04:00PM","memo":""},{"date":"2026-05-15","campus":"下高井戸","job":"絵画造形","wage":1600,"hours":1,"pay":1600,"transit":0,"allowance":0,"timeSpan":"04:00PM-05:00PM","memo":""},{"date":"2026-05-22","campus":"下高井戸","job":"保育","wage":1400,"hours":1.5,"pay":2100,"transit":0,"allowance":0,"timeSpan":"02:30PM-04:00PM","memo":""},{"date":"2026-05-22","campus":"下高井戸","job":"絵画造形","wage":1600,"hours":1,"pay":1600,"transit":0,"allowance":0,"timeSpan":"04:00PM-05:00PM","memo":""},{"date":"2026-05-29","campus":"下高井戸","job":"保育","wage":1400,"hours":1.5,"pay":2100,"transit":0,"allowance":0,"timeSpan":"02:30PM-04:00PM","memo":""},{"date":"2026-05-29","campus":"下高井戸","job":"絵画造形","wage":1600,"hours":1,"pay":1600,"transit":0,"allowance":0,"timeSpan":"04:00PM-05:00PM","memo":""},{"date":"2026-05-01","campus":"用賀","job":"保育","wage":1400,"hours":2,"pay":2800,"transit":830,"allowance":0,"timeSpan":"02:00PM-04:00PM","memo":""}]},"expenses":{}}';
         
-        if (embeddedDataStr && embeddedDataStr !== '' && !localStorage.getItem('v17_appMasterData')) {
-            try {
-                appData = JSON.parse(embeddedDataStr);
-                localStorage.setItem('v17_appMasterData', JSON.stringify(appData));
-            } catch(e) { console.error("Initial data loading failed", e); }
-        } else {
-            const raw = localStorage.getItem('v17_appMasterData');
-            if (raw) { try { appData = JSON.parse(raw); } catch(e){} }
+        try {
+            appData = JSON.parse(embeddedDataStr);
+            localStorage.setItem('v17_appMasterData', JSON.stringify(appData));
+        } catch(e) { 
+            console.error("Initial data loading failed", e); 
         }
 
-        const storageKeys = ['v17_appMasterData', 'appMasterData', 'v16_appMasterData', 'v15_appMasterData'];
-        
-        const storageKeys = ['v17_appMasterData', 'appMasterData', 'v16_appMasterData', 'v15_appMasterData'];
-        
-        for (const key of storageKeys) {
-            const raw = localStorage.getItem(key);
-            if (raw) {
-                try {
-                    const parsed = JSON.parse(raw);
-                    if (parsed && (parsed.shifts || parsed.expenses)) {
-                        if (parsed.shifts) {
-                            for (const m in parsed.shifts) {
-                                if (!appData.shifts[m]) appData.shifts[m] = [];
-                                parsed.shifts[m].forEach(newS => {
-                                    const exists = appData.shifts[m].some(oldS => oldS.date === newS.date && oldS.timeSpan === newS.timeSpan && oldS.job === newS.job);
-                                    if (!exists) appData.shifts[m].push(newS);
-                                });
-                            }
-                        }
-                        if (parsed.expenses) {
-                            for (const m in parsed.expenses) {
-                                if (!appData.expenses[m]) appData.expenses[m] = [];
-                                parsed.expenses[m].forEach(newE => {
-                                    const exists = appData.expenses[m].some(oldE => oldE.date === newE.date && oldE.amount === newE.amount && oldE.note === newE.note);
-                                    if (!exists) appData.expenses[m].push(newE);
-                                });
-                            }
-                        }
-                    }
-                } catch(e) { console.error("Data migration error for key: " + key, e); }
-            }
-        }
-        localStorage.setItem('v17_appMasterData', JSON.stringify(appData));
-
+        // 月別セレクトボックスの生成
         const monthSelect = document.getElementById('global-month');
-        const currentTargetDate = new Date();
-        currentTargetDate.setMonth(currentTargetDate.getMonth() + 1); 
-        for (let i = -6; i <= 6; i++) {
-            const d = new Date(); d.setMonth(d.getMonth() + i + 1);
+        monthSelect.innerHTML = ''; // 初期化
+        
+        // データ内に存在する月を自動で選択肢に追加
+        const availableMonths = Object.keys(appData.shifts).sort((a, b) => b.localeCompare(a));
+        availableMonths.forEach(mKey => {
+            const [year, month] = mKey.split('-');
+            const option = document.createElement('option');
+            option.value = mKey;
+            option.innerText = `${year}年${parseInt(month)}月 支給分`;
+            monthSelect.appendChild(option);
+        });
+
+        // 選択肢がない場合のフォールバック
+        if (availableMonths.length === 0) {
+            const d = new Date();
             const mKey = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}`;
             const option = document.createElement('option');
-            option.value = mKey; option.innerText = `${d.getFullYear()}年${d.getMonth() + 1}月 支給分`;
-            if (i === 0) option.selected = true;
+            option.value = mKey;
+            option.innerText = `${d.getFullYear()}年${d.getMonth() + 1}月 支給分`;
             monthSelect.appendChild(option);
         }
+
         let activeMonth = monthSelect.value;
 
         window.onload = function() {
