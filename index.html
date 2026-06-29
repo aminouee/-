@@ -686,25 +686,29 @@ if (globalCampus === 'その他') {
         }
 
         // 経費編集フォームにデータを呼び出す関数
+        // 経費編集フォームにデータを呼び出す関数
         function editExpense(index) {
             const expense = appData.expenses[activeMonth][index];
             document.getElementById('exp-amount').value = expense.amount;
             document.getElementById('exp-note').value = expense.note;
             expCampus = expense.campus;
-            expBase64 = ""; // 一旦初期化（再設定しなければ元の画像を維持するロジック）
+            expBase64 = ""; 
 
-            // どの経費を編集しているかインデックスを記憶
             editingExpenseIndex = index;
 
-            // ボタンのアクティブ状態を連動
-            const buttons = document.querySelectorAll('.expense-item-area .pill-btn, #expense-form-container .pill-btn'); 
+            // エラーを修正したボタンの連動処理
+            const buttons = document.querySelectorAll('.pill-btn'); 
             buttons.forEach(b => {
                 if (b.innerText.trim() === expense.campus) {
                     b.classList.add('active');
                 } else {
-                    b.classList.remove('remove');
                     b.classList.remove('active');
                 }
+            });
+
+            // フォームへスクロール
+            document.getElementById('exp-amount').scrollIntoView({ behavior: 'smooth' });
+        }
             });
 
             // フォームへスクロール
